@@ -1,0 +1,30 @@
+{
+  "name": "parsereact-todo",
+  "main": "js/app.js",
+  "dependencies": {
+    "babel": "^5.5.6",
+    "babel-core": "^5.6.7",
+    "babel-eslint": "^3.1.23",
+    "babel-loader": "^5.2.1",
+    "babel-runtime": "^5.6.7",
+    "express": "^4.13.3",
+    "extract-text-webpack-plugin": "^0.8.0",
+    "jade": "^1.11.0",
+    "node-notifier": "^4.2.3",
+    "parse": "^1.4.0",
+    "parse-react": "^0.3.0",
+    "react": "^0.13.0",
+    "webpack": "^1.8.8"
+  },
+  "devDependencies": {
+    "babel-eslint": "^2.0.2",
+    "eslint": "^0.17.1",
+    "supervisor": "^0.6.0"
+  },
+  "scripts": {
+    "start": "node server.js & webpack -w",
+    "build": "./node_modules/.bin/webpack --config webpack.config.production.js",
+    "lint": "./node_modules/.bin/eslint .",
+    "postinstall": "./node_modules/.bin/webpack --config webpack.config.production.js"
+  }
+}

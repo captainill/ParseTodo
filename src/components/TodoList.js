@@ -26,8 +26,8 @@ var ParseReact = require('parse-react');
 var React = require('react');
 var ParseComponent = require('parse-react/class')
 
-var TodoItem = require('./TodoItem.react.js');
-var TodoCreator = require('./TodoCreator.react.js');
+var TodoItem = require('./TodoItem.js');
+var TodoCreator = require('./TodoCreator.js');
 
 // Top-Level component that binds to Parse using the ParseReact Mixin.
 // This should help demonstrate the "It's Just That Easy" potential here.

@@ -26,7 +26,7 @@ var Parse = require('parse').Parse;
 // Insert your app's keys here:
 Parse.initialize('4ulF4VUakzsupkUKMR5Q0GbjlTfxArrMCtkDn10s', 'bv2zQZ7TJAh4L9p4PPRaBTcFhCq3yPVF7IFcg7gT');
 
-var TodoList = require('./TodoList.react.js');
+var TodoList = require('./components/TodoList.js');
 
 console.log(document, document.getElementById('app'))
 React.render(

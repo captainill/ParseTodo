@@ -22,7 +22,7 @@
 
 var React = require('react');
 
-var PrettyDate = require('./PrettyDate.react.js');
+var PrettyDate = require('./PrettyDate.js');
 
 var TodoItem = React.createClass({
   getInitialState: function() {

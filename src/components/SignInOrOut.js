@@ -1,10 +1,9 @@
-var React = require('react');
-var Parse = require('parse').Parse;
+import React from 'react';
+const Parse = require('parse').Parse;
 // ParseReact sits on top of your Parse singleton
-var ParseReact = require('parse-react');
-var ParseComponent = require('parse-react/class')
-var Router = require('react-router');
-var Link = Router.Link;
+import ParseReact from 'parse-react';
+import ParseComponent from 'parse-react/class';
+import { Link } from'react-router';
 import TodoList from './TodoList';
 
 export default class SignInOrOut extends ParseComponent {

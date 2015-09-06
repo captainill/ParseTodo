@@ -1,8 +1,6 @@
-var React = require('react');
-var Router = require('react-router');
-var Link = Router.Link;
-var RouteHandler = Router.RouteHandler;
-var SignInOrOut = require('./SignInOrOut.js');
+import React from 'react';
+import { RouteHandler, Link } from 'react-router';
+import SignInOrOut from './SignInOrOut.js';
 
 export default class App extends React.Component{
   static contextTypes = {

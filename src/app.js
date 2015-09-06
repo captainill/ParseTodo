@@ -20,14 +20,13 @@
  *
  */
 
-var React = require('react');
-var Router = require('react-router');
-var Parse = require('parse').Parse;
+import React from 'react';
+import Router from 'react-router';
+import App from './components/App.js';
 
+const Parse = require('parse').Parse;
 // Insert your app's keys here:
 Parse.initialize('4ulF4VUakzsupkUKMR5Q0GbjlTfxArrMCtkDn10s', 'bv2zQZ7TJAh4L9p4PPRaBTcFhCq3yPVF7IFcg7gT');
-
-var App = require('./components/App.js');
 
 Router.run(require('./routes'), function (Handler) {
   React.render(<Handler/>, document.getElementById('app'));

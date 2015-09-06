@@ -1,4 +1,4 @@
-const React = require('react');
+import React from 'react';
 import {Route, DefaultRoute, NotFoundRoute} from 'react-router';
 
 module.exports = (

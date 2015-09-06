@@ -1,52 +1,47 @@
 var React = require('react');
-var FluxibleMixin = require('fluxible/addons/FluxibleMixin');
-var Router = require('react-router/build/npm/lib');
+var Parse = require('parse').Parse;
+// ParseReact sits on top of your Parse singleton
+var ParseReact = require('parse-react');
+var ParseComponent = require('parse-react/class')
+var Router = require('react-router');
 var Link = Router.Link;
-var AuthStore = require('../stores/AuthStore');
-var signOut = require('../actions/signOut');
+import TodoList from './TodoList';
 
-var SignInOrOut = React.createClass({
-  contextTypes: {
-    router: React.PropTypes.func.isRequired
-  },
+export default class SignInOrOut extends ParseComponent {
 
-  mixins: [FluxibleMixin],
+  constructor(props) {
+    super(props);
 
-  statics: {
-    storeListeners: [AuthStore]
-  },
-
-  getInitialState: function() {
-    return this.getStateFromStores();
-  },
-
-  getStateFromStores: function () {
-    return {
-      isAuthenticated: this.getStore(AuthStore).isAuthenticated(),
-      isSigningOut: this.getStore(AuthStore).isSigningOut()
+    this.state = {
+      error: null,
+      signup: false
     };
-  },
-
-  onChange: function() {
-    this.setState(this.getStateFromStores());
-  },
-
-  render: function() {
-    if (!this.state.isAuthenticated) {
-      return <Link to="signin">Sign in</Link>;
-    }
-
-    if (this.state.isSigningOut) {
-      return <span>Signing out...</span>;
-    }
-
-    return <a href="" onClick={this.handleSignOut}>Sign out</a>;
-  },
-
-  handleSignOut: function(e) {
-    e.preventDefault();
-    this.executeAction(signOut, {});
   }
-});
 
-module.exports = SignInOrOut;
+  observe() {
+    return {
+      user: ParseReact.currentUser
+    };
+  }
+
+  render(){
+    if (this.data.user) {
+      return (
+        <div>
+          <a className='logOut' onClick={this.logOut}>
+            <svg viewBox='0 0 60 60'>
+              <path d="M0,0 L30,0 L30,10 L10,10 L10,50 L30,50 L30,60 L0,60 Z"></path>
+              <path d="M20,23 L40,23 L40,10 L60,30 L40,50 L40,37 L20,37 Z"></path>
+            </svg>
+          </a>
+          <TodoList />
+        </div>
+      );
+    }
+    return (
+      <div>
+        you are not logged in
+      </div>
+    )
+  }
+};

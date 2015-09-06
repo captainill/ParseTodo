@@ -28,7 +28,8 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         include: path.join(__dirname, 'src'),
-        loader: 'babel'
+        loader: 'babel',
+        query: {stage: 0}
       },
       {
         test: /\.scss$/,

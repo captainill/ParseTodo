@@ -21,15 +21,14 @@
  */
 
 var React = require('react');
+var Router = require('react-router');
 var Parse = require('parse').Parse;
 
 // Insert your app's keys here:
 Parse.initialize('4ulF4VUakzsupkUKMR5Q0GbjlTfxArrMCtkDn10s', 'bv2zQZ7TJAh4L9p4PPRaBTcFhCq3yPVF7IFcg7gT');
 
-var TodoList = require('./components/TodoList.js');
+var App = require('./components/App.js');
 
-console.log(document, document.getElementById('app'))
-React.render(
-  <TodoList />,
-  document.getElementById('app')
-);
+Router.run(require('./routes'), function (Handler) {
+  React.render(<Handler/>, document.getElementById('app'));
+});

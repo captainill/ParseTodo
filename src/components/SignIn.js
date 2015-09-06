@@ -1,39 +1,30 @@
 var React = require('react');
-var FluxibleMixin = require('fluxible/addons/FluxibleMixin');
-var AuthStore = require('../stores/AuthStore');
-var signIn = require('../actions/signIn');
 
-var SignIn = React.createClass({
-  mixins: [FluxibleMixin],
+export default class SignIn extends React.Component{
 
-  statics: {
-    storeListeners: [AuthStore],
-    willTransitionTo: function(transition) {
-      var isAuthenticated = transition.context
-        .getActionContext().getStore(AuthStore).isAuthenticated();
+  constructor(props){
+		super(props);
 
-      if (isAuthenticated) {
-        transition.redirect('/contacts');
-      }
+    this.state = {
+      error: null
     }
-  },
+  }
 
-  getInitialState: function() {
-    return this.getStateFromStores();
-  },
+  static contextTypes = {
+    router: React.PropTypes.func
+  }
 
-  getStateFromStores: function () {
-    return {
-      isSigningIn: this.getStore(AuthStore).isSigningIn(),
-      error: this.getStore(AuthStore).getSignInError()
-    };
-  },
+  static willTransitionTo(transition, params, query) {
+    console.log('transition', transition, params, query);
+    // var isAuthenticated = transition.context
+    //   .getActionContext().getStore(AuthStore).isAuthenticated();
+    //
+    // if (isAuthenticated) {
+    //   transition.redirect('/contacts');
+    // }
+  }
 
-  onChange: function() {
-    this.setState(this.getStateFromStores());
-  },
-
-  render: function() {
+  render() {
     return (
       <div>
         <h1>Sign in</h1>
@@ -48,16 +39,11 @@ var SignIn = React.createClass({
         {this.renderError()}
       </div>
     );
-  },
+  }
 
-  renderButton: function() {
+  renderButton() {
     var disabled;
     var text = 'Sign in';
-
-    if (this.state.isSigningIn) {
-      disabled = true;
-      text = 'Signing in...';
-    }
 
     return (
       <button
@@ -67,19 +53,19 @@ var SignIn = React.createClass({
         {text}
       </button>
     );
-  },
+  }
 
-  handleSignIn: function(e) {
+  handleSignIn(e) {
     e.preventDefault();
     var email = this.refs.email.getDOMNode().value;
     var password = this.refs.password.getDOMNode().value;
-    this.executeAction(signIn, {
-      email: email,
-      password: password
-    });
-  },
+    // this.executeAction(signIn, {
+    //   email: email,
+    //   password: password
+    // });
+  }
 
-  renderError: function() {
+  renderError() {
     var error = this.state.error;
     if (!error) {
       return null;
@@ -95,6 +81,4 @@ var SignIn = React.createClass({
 
     return <p style={{color: 'red'}}>{text}</p>;
   }
-});
-
-module.exports = SignIn;
+};

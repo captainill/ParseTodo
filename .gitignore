@@ -1,4 +1,6 @@
 /node_modules
 /public
+/assets/client.js
+/assets/client.js.map
 .DS_Store
 npm-debug.log

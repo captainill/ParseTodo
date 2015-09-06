@@ -3,12 +3,7 @@ import { Link } from 'react-router';
 var Parse = require('parse').Parse;
 var ParseReact = require('parse-react');
 
-export default class SignIn extends React.Component{
-
-
-  static contextTypes = {
-    router: React.PropTypes.func
-  }
+class SignIn extends React.Component{
 
   constructor(props){
 		super(props);
@@ -20,6 +15,7 @@ export default class SignIn extends React.Component{
 
     this.submitForm = this.submitForm.bind(this);
     this.toggleSignup = this.toggleSignup.bind(this);
+    this.keyDown = this.keyDown.bind(this);
   }
 
   render() {
@@ -42,7 +38,7 @@ export default class SignIn extends React.Component{
       <div>
         { logoutBtn }
         <h1>Sign in</h1>
-        <form onSubmit={this.submitForm}>
+        <form onKeyDown={this.keyDown}>
           <p><input ref="username" name="username" placeholder="Enter username" defaultValue="admin"/></p>
           <p>
             <input ref="password" name="password" type="password" defaultValue="pass"/>
@@ -82,7 +78,7 @@ export default class SignIn extends React.Component{
         });
         u.signUp().then(function() {
           console.log('signup success!')
-          self.router.transitionTo('list');
+          self.context.router.transitionTo('list');
           // self.setState({
           //   error: null
           // });
@@ -95,7 +91,7 @@ export default class SignIn extends React.Component{
       } else {
         Parse.User.logIn(username, password).then(function() {
           console.log('login success')
-          self.router.transitionTo('list');
+          self.context.router.transitionTo('list');
           // self.setState({
           //   error: null
           // });
@@ -120,8 +116,19 @@ export default class SignIn extends React.Component{
     });
   }
 
+  keyDown(e) {
+    if (e.keyCode === 13) {
+      this.submitForm();
+    }
+  }
 
   logOut() {
     Parse.User.logOut();
   }
 };
+
+SignIn.contextTypes = {
+  router: React.PropTypes.func.isRequired
+};
+
+export default SignIn;

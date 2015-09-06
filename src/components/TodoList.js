@@ -32,6 +32,16 @@ var TodoCreator = require('./TodoCreator.js');
 // Top-Level component that binds to Parse using the ParseReact Mixin.
 // This should help demonstrate the "It's Just That Easy" potential here.
 export default class TodoList extends ParseComponent {
+
+  static willTransitionTo(transition) {
+    console.log('transition in TodoList ', transition)
+    console.log('ParseReact.currentUser ', ParseReact.currentUser);
+    const currentUser = Parse.User.current();
+    if (!currentUser) {
+      transition.redirect('/signin');
+    }
+  }
+
   observe(props, state) {
     return {
       items: new Parse.Query('TodoItem').ascending('createdAt')

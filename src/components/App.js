@@ -1,6 +1,5 @@
 import React from 'react';
 import { RouteHandler, Link } from 'react-router';
-import SignInOrOut from './SignInOrOut.js';
 
 export default class App extends React.Component{
   static contextTypes = {
@@ -10,7 +9,6 @@ export default class App extends React.Component{
   render() {
     return (
       <div>
-        <SignInOrOut />
         <RouteHandler />
       </div>
     );

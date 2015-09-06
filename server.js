@@ -5,7 +5,7 @@ app.use(express.static('assets'));
 app.set('view engine', 'jade');
 
 app.get('/', function (req, res) {
-  res.render('index', { title: 'Hey', message: 'Hello there!'});
+  res.render('index');
 });
 
 var server = app.listen(process.env.PORT || 3000, function () {
